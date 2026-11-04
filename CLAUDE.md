@@ -53,7 +53,7 @@ Update ticket keys to match Jira and mark progress as tickets finish.
 
 1. [x] Accounts, tools, and Jira setup
 2. [x] Astro project + GitHub repo with `main` and `develop`
-3. [ ] CI checks on PRs (WEB-10): `ci.yml`, PR template, branch rulesets. In progress; check the repo to see what's already done.
+3. [x] CI checks on PRs (WEB-10): `ci.yml`, PR template, branch rulesets
 4. [ ] Deploy to Cloudflare: PR preview URLs, staging from `develop`, production from `main`, visible STAGING badge, rollback steps documented in README
 5. [ ] Pages: base layout, home, about, chapters, events (Markdown content collections)
 6. [ ] D1 database + event sign-ups
