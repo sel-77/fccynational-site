@@ -12,6 +12,8 @@
 		// Staging Worker, deployed from `develop` with `--env staging`. PR previews also live under it.
 		"staging": {
 			"name": "fccynational-site-staging",
+			// Opts in to `wrangler preview`: Workers Builds creates a Preview for each non-develop branch.
+			"previews": {},
 		},
 	},
 }
