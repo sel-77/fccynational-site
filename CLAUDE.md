@@ -32,6 +32,7 @@ Don't suggest paid services or paid plans. If a free tier has a catch (limits, p
 - Commit messages use Conventional Commits with the ticket key: `feat: add events page (WEB-12)`.
 - Open PRs into `develop` and squash-merge them. CI (check, test, build) must pass.
 - Releases: PR from `develop` into `main` with a merge commit, then tag `vX.Y.Z` with a GitHub Release.
+- Hotfixes: branch `hotfix/WEB-..` from `main`, open PRs into both `main` (merge commit) and `develop` (squash). Full steps in CONTRIBUTING.md.
 - **No AI attribution:** never add `Co-Authored-By` trailers, "Generated with Claude Code" lines, or session links to commit messages, PR titles, or PR descriptions. Commits are authored by me only.
 - **Privacy:** sign-up forms may collect minors' personal data. Follow the Philippine Data Privacy Act: collect only the fields we need, include a consent checkbox (with parent/guardian consent for under-18s), and never log personal data.
 
@@ -59,4 +60,4 @@ Update ticket keys to match Jira and mark progress as tickets finish.
 6. [ ] D1 database + event sign-ups
 7. [ ] Contact form + Turnstile spam protection
 8. [ ] Monitoring (free Sentry plan) and launch v1.0.0
-9. [ ] CONTRIBUTING.md documenting this workflow for future teammates
+9. [x] CONTRIBUTING.md documenting this workflow for future teammates (WEB-12)
