@@ -7,6 +7,10 @@ Info site for Filipino Chinese Catholic Youth: chapters, events, and event sign-
 2. `npm install`
 3. `npm run dev` → http://localhost:4321
 
+## Contributing
+
+Branching, commits, pull requests, releases, and hotfixes: see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Environments
 
 | Environment | Deployed from | Cloudflare Worker | URL | Badge |
