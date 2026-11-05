@@ -13,8 +13,8 @@ Info site for Filipino Chinese Catholic Youth: chapters, events, and event sign-
 |---|---|---|---|---|
 | Local | your machine | none | http://localhost:4321 | DEVELOPMENT |
 | PR preview | any PR branch | `fccynational-site-staging` (Previews) | posted on the PR | STAGING |
-| Staging | `develop` | `fccynational-site-staging` | https://fccynational-site-staging.SUBDOMAIN.workers.dev | STAGING |
-| Production | `main` | `fccynational-site` | https://fccynational-site.SUBDOMAIN.workers.dev | none |
+| Staging | `develop` | `fccynational-site-staging` | https://fccynational-site-staging.fccy.workers.dev | STAGING |
+| Production | `main` | `fccynational-site` | https://fccynational-site.fccy.workers.dev | none |
 
 Deploys are run by [Cloudflare Workers Builds](https://developers.cloudflare.com/workers/ci-cd/builds/), not GitHub Actions: merging a PR into `develop` or `main` deploys it automatically. Each Worker sets the `SITE_ENV` build variable (`staging` or `production`), which controls the environment badge.
 
