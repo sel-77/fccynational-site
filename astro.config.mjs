@@ -1,5 +1,17 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
 
 // https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+	env: {
+		schema: {
+			// Set as a build variable on each Cloudflare Worker. Anything but "production" shows the environment badge.
+			SITE_ENV: envField.enum({
+				context: 'client',
+				access: 'public',
+				values: ['development', 'staging', 'production'],
+				default: 'development',
+			}),
+		},
+	},
+});

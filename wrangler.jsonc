@@ -1,0 +1,19 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	// Production Worker, deployed from `main`. The name must match the Worker in the Cloudflare dashboard.
+	"name": "fccynational-site",
+	"compatibility_date": "2026-11-01",
+	// Static site only: Cloudflare serves the Astro build output directly (no Worker script yet).
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "404-page",
+	},
+	"env": {
+		// Staging Worker, deployed from `develop` with `--env staging`. PR previews also live under it.
+		"staging": {
+			"name": "fccynational-site-staging",
+			// Opts in to `wrangler preview`: Workers Builds creates a Preview for each non-develop branch.
+			"previews": {},
+		},
+	},
+}
