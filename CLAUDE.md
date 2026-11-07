@@ -2,7 +2,7 @@
 
 ## About this project
 
-Info website for a youth organization in the Philippines with 10–30 chapters nationwide. It shows chapters and events, and has event sign-ups and a contact form. Content is updated by a team of 1–3 people (currently just me).
+Info website for a youth organization in the Philippines with 10–30 chapters nationwide. It shows chapters, national activities, and the national officers (NDO), and has a contact form; event sign-ups come after launch. Content is updated by a team of 1–3 people (currently just me). Pages, content types, design direction, and release plan are in [docs/site-plan.md](docs/site-plan.md).
 
 ## Hard constraint: everything must be free
 
@@ -10,12 +10,12 @@ Don't suggest paid services or paid plans. If a free tier has a catch (limits, p
 
 ## Stack and why we chose it
 
-- **Astro + TypeScript (strict):** content site; events and chapters live as Markdown content collections; fast static pages.
+- **Astro + TypeScript (strict):** content site; chapters, activities, and officers live as Markdown content collections; fast static pages.
 - **Cloudflare Workers with static assets (free plan):** free unlimited static requests; free `.workers.dev` subdomain for now (no custom domain yet).
 - **Cloudflare D1:** stores event sign-ups and contact messages. **Turnstile** blocks spam. We chose this over Supabase because free Supabase projects pause when inactive, which would break the forms between events.
 - **Vitest** for tests, **GitHub Actions** for CI.
 - **GitHub repo is public:** branch protection and unlimited CI minutes are free on public repos. Never commit secrets; they go in Cloudflare's secret storage.
-- **Jira** (Kanban, project key `WEB`) for tickets.
+- **Jira** (Kanban, space key `WEB`) for tickets. Connected to GitHub with the GitHub for Jira app; automation moves tickets To Do → In Progress (branch pushed) → In Review (PR opened) → Done (PR merged). Claude is **not** connected to Jira: draft ticket text (type, summary, description, epic, fix version) for me to paste, and ask me for the key.
 - **My machine:** Windows, using PowerShell in VS Code's terminal.
 
 ## Commands
@@ -50,14 +50,28 @@ I'm a CS graduate building my first real project. I want to understand the softw
 
 ## Roadmap
 
-Update ticket keys to match Jira and mark progress as tickets finish.
+Each open item is a Jira epic. One ticket = one branch = one PR. Mark items done as epics finish.
 
-1. [x] Accounts, tools, and Jira setup
-2. [x] Astro project + GitHub repo with `main` and `develop`
-3. [x] CI checks on PRs (WEB-10): `ci.yml`, PR template, branch rulesets
-4. [x] Deploy to Cloudflare (WEB-11): PR preview URLs, staging from `develop`, production from `main`, visible STAGING badge, rollback steps documented in README
-5. [ ] Pages: base layout, home, about, chapters, events (Markdown content collections)
-6. [ ] D1 database + event sign-ups
-7. [ ] Contact form + Turnstile spam protection
-8. [ ] Monitoring (free Sentry plan) and launch v1.0.0
-9. [x] CONTRIBUTING.md documenting this workflow for future teammates (WEB-12)
+**Done (setup)**
+
+- [x] Accounts, tools, and Jira setup
+- [x] Astro project + GitHub repo with `main` and `develop`
+- [x] CI checks on PRs (WEB-10): `ci.yml`, PR template, branch rulesets
+- [x] Deploy to Cloudflare (WEB-11): PR preview URLs, staging from `develop`, production from `main`, visible STAGING badge, rollback steps documented in README
+- [x] CONTRIBUTING.md documenting this workflow for future teammates (WEB-12)
+- [ ] Jira–GitHub automation and site plan documented (WEB-22)
+
+**v1.0.0: launch**
+
+1. [ ] Design system & layout: Tailwind + Starwind UI, theme, base layout
+2. [ ] Home & About: hero, intro, Mission & Vision, chapter map, About page, 404
+3. [ ] Contact form: D1 storage + Turnstile spam protection
+4. [ ] Launch v1.0.0: privacy notice, SEO, monitoring (free Sentry plan), release
+
+**After launch**
+
+5. [ ] Chapters (v1.1.0)
+6. [ ] National Activities (v1.2.0)
+7. [ ] NDO (v1.3.0)
+8. [ ] Event sign-ups with D1 (later)
+9. [ ] News (later)
