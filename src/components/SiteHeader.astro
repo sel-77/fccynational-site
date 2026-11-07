@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import logo from '@/assets/brand/fccy-logo.png';
+import { isCurrent, mainNav } from '@/data/navigation';
+
+const { pathname } = Astro.url;
+---
+
+<header class="border-b border-border">
+	<div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-8 gap-y-3 px-6 py-4">
+		<a href="/" class="flex items-center gap-3" aria-label="FCCY National home">
+			<Image src={logo} alt="" width={40} height={40} loading="eager" />
+			<span class="font-heading text-lg font-semibold tracking-wide">FCCY</span>
+		</a>
+		<nav aria-label="Main">
+			<ul class="flex gap-6 text-sm font-medium">
+				{
+					mainNav.map(({ label, href }) => (
+						<li>
+							<a
+								href={href}
+								aria-current={isCurrent(href, pathname) ? 'page' : undefined}
+								class="underline-offset-4 hover:underline aria-[current=page]:underline"
+							>
+								{label}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</nav>
+	</div>
+</header>

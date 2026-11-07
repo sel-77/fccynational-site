@@ -1,0 +1,57 @@
+---
+// The shared shell for every page: <head>, fonts, favicon, environment bar, header, and footer.
+// Pages pass a title and description, and put their own content in the default slot.
+import '@/styles/starwind.css';
+import { Font, getImage } from 'astro:assets';
+import EnvBadge from '@/components/EnvBadge.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import SiteHeader from '@/components/SiteHeader.astro';
+import logo from '@/assets/brand/fccy-logo.png';
+
+interface Props {
+	/** Page name, shown before the site name in the browser tab. Leave out on the home page. */
+	title?: string;
+	/** One or two sentences for search results and link previews. */
+	description?: string;
+}
+
+const SITE_NAME = 'FCCY National';
+const {
+	title,
+	description = 'Filipino-Chinese Catholic Youth: chapters, national activities, and officers across the Philippines.',
+} = Astro.props;
+const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+
+// Small PNG versions of the seal for the browser tab and phone home screens.
+const favicon = await getImage({ src: logo, width: 64, height: 64, format: 'png' });
+const appleTouchIcon = await getImage({ src: logo, width: 180, height: 180, format: 'png' });
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/png" href={favicon.src} />
+		<link rel="apple-touch-icon" href={appleTouchIcon.src} />
+		<Font cssVariable="--font-inter" preload />
+		<Font cssVariable="--font-cinzel" preload />
+		<title>{fullTitle}</title>
+	</head>
+	<body class="flex min-h-screen flex-col">
+		<!-- Lets keyboard and screen-reader users jump past the header. Visible only when focused. -->
+		<a
+			href="#main"
+			class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-foreground focus:px-4 focus:py-2 focus:text-background"
+		>
+			Skip to content
+		</a>
+		<EnvBadge />
+		<SiteHeader />
+		<main id="main" class="mx-auto w-full max-w-6xl flex-1 px-6 py-16">
+			<slot />
+		</main>
+		<SiteFooter />
+	</body>
+</html>
