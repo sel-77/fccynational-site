@@ -27,6 +27,12 @@
 }
 
 @theme inline {
+  /* Fonts are loaded by Astro (see `fonts` in astro.config.mjs).
+     font-sans = Inter, for all text. font-heading = Cinzel, for headings only:
+     Cinzel has no lowercase, so never use it for body text. */
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-cinzel);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -73,6 +79,8 @@
   --color-sidebar-outline: var(--sidebar-outline);
 }
 
+/* FCCY theme: pure black and white, matching the monochrome seal. Photos and pubmats bring the color.
+   info/success/warning/error stay colored because they carry meaning (e.g. form errors). */
 :root {
   --background: var(--color-white);
   --foreground: var(--color-neutral-950);
@@ -80,9 +88,9 @@
   --card-foreground: var(--color-neutral-950);
   --popover: var(--color-white);
   --popover-foreground: var(--color-neutral-950);
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-neutral-50);
-  --primary-accent: var(--color-blue-700);
+  --primary: var(--color-neutral-950);
+  --primary-foreground: var(--color-white);
+  --primary-accent: var(--color-neutral-950);
   --secondary: var(--color-neutral-200);
   --secondary-foreground: var(--color-neutral-950);
   --secondary-accent: var(--color-neutral-950);
@@ -101,12 +109,13 @@
   --border: var(--color-neutral-200);
   --input: var(--color-neutral-200);
   --outline: var(--color-neutral-400);
-  --radius: 0.625rem;
+  /* Square corners for the editorial look. Smaller radius steps go below 0 and are clamped to 0. */
+  --radius: 0rem;
 
   /* sidebar variables */
   --sidebar-background: var(--color-neutral-50);
   --sidebar-foreground: var(--color-neutral-950);
-  --sidebar-primary: var(--color-blue-700);
+  --sidebar-primary: var(--color-neutral-950);
   --sidebar-primary-foreground: var(--color-neutral-50);
   --sidebar-accent: var(--color-neutral-100);
   --sidebar-accent-foreground: var(--color-neutral-900);
@@ -121,9 +130,9 @@
   --card-foreground: var(--color-neutral-50);
   --popover: var(--color-neutral-900);
   --popover-foreground: var(--color-neutral-50);
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-neutral-50);
-  --primary-accent: var(--color-blue-400);
+  --primary: var(--color-white);
+  --primary-foreground: var(--color-neutral-950);
+  --primary-accent: var(--color-white);
   --secondary: var(--color-neutral-800);
   --secondary-foreground: var(--color-neutral-50);
   --secondary-accent: var(--color-neutral-50);
@@ -146,8 +155,8 @@
   /* sidebars variables */
   --sidebar-background: var(--color-neutral-900);
   --sidebar-foreground: var(--color-neutral-50);
-  --sidebar-primary: var(--color-blue-700);
-  --sidebar-primary-foreground: var(--color-neutral-50);
+  --sidebar-primary: var(--color-white);
+  --sidebar-primary-foreground: var(--color-neutral-950);
   --sidebar-accent: var(--color-neutral-800);
   --sidebar-accent-foreground: var(--color-neutral-100);
   --sidebar-border: var(--color-neutral-800);
@@ -159,7 +168,25 @@
     @apply border-border outline-outline/50;
   }
   body {
-    @apply bg-background text-foreground scheme-light dark:scheme-dark;
+    @apply bg-background text-foreground scheme-light dark:scheme-dark font-sans antialiased;
+  }
+  /* Editorial type scale: big Cinzel headings, generous line height for Inter body text. */
+  h1,
+  h2,
+  h3 {
+    @apply font-heading leading-tight tracking-wide text-balance;
+  }
+  h1 {
+    @apply text-4xl font-semibold md:text-6xl;
+  }
+  h2 {
+    @apply text-3xl font-medium md:text-5xl;
+  }
+  h3 {
+    @apply text-xl font-medium md:text-2xl;
+  }
+  p {
+    @apply leading-relaxed text-pretty;
   }
   button {
     @apply cursor-pointer;

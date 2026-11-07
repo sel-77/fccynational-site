@@ -1,22 +1,38 @@
 ---
 import '@/styles/starwind.css';
+import { Font, Image, getImage } from 'astro:assets';
 import EnvBadge from '@/components/EnvBadge.astro';
 import { Button } from '@/components/starwind/button';
+import logo from '@/assets/brand/fccy-logo.png';
+
+// Small PNG versions of the seal for the browser tab and phone home screens.
+const favicon = await getImage({ src: logo, width: 64, height: 64, format: 'png' });
+const appleTouchIcon = await getImage({ src: logo, width: 180, height: 180, format: 'png' });
 ---
 
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/png" href={favicon.src} />
+		<link rel="apple-touch-icon" href={appleTouchIcon.src} />
+		<Font cssVariable="--font-inter" preload />
+		<Font cssVariable="--font-cinzel" preload />
 		<title>FCCY National</title>
 	</head>
-	<body class="p-8">
+	<body>
 		<EnvBadge />
-		<h1 class="mb-4 text-4xl font-bold">FCCY National</h1>
-		<!-- Placeholder until the Home & About tickets: proves Tailwind and Starwind UI work. -->
-		<Button href="#">Starwind button</Button>
+		<!-- Placeholder until the Home & About tickets: previews the theme, fonts, and logo. -->
+		<main class="mx-auto max-w-3xl space-y-8 px-6 py-16">
+			<Image src={logo} alt="FCCY seal" width={128} height={128} loading="eager" />
+			<h1>Filipino-Chinese Catholic Youth</h1>
+			<h2>National Activities</h2>
+			<p>
+				Body text is set in Inter. Headings use Cinzel, echoing the Roman lettering on the FCCY seal.
+				The site is black and white so photos and pubmats bring the color.
+			</p>
+			<Button href="#">Starwind button</Button>
+		</main>
 	</body>
 </html>

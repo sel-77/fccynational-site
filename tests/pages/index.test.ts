@@ -19,6 +19,15 @@ describe('home page', () => {
 		expect(html).toContain('data-slot="button"');
 	});
 
+	it('loads the brand fonts (Inter and Cinzel)', () => {
+		expect(html).toContain('--font-inter');
+		expect(html).toContain('--font-cinzel');
+	});
+
+	it('uses the FCCY seal as the favicon', () => {
+		expect(html).toMatch(/<link rel="icon"[^>]+fccy-logo/);
+	});
+
 	it('ships no client-side JavaScript', () => {
 		expect(html).not.toContain('<script');
 	});
