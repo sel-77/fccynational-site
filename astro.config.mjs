@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, envField } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,5 +14,8 @@ export default defineConfig({
 				default: 'development',
 			}),
 		},
+	},
+	vite: {
+		plugins: [tailwindcss()],
 	},
 });

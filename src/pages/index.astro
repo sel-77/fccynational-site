@@ -1,5 +1,7 @@
 ---
-import EnvBadge from '../components/EnvBadge.astro';
+import '@/styles/starwind.css';
+import EnvBadge from '@/components/EnvBadge.astro';
+import { Button } from '@/components/starwind/button';
 ---
 
 <html lang="en">
@@ -9,10 +11,12 @@ import EnvBadge from '../components/EnvBadge.astro';
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>FCCY National</title>
 	</head>
-	<body>
+	<body class="p-8">
 		<EnvBadge />
-		<h1>Astro</h1>
+		<h1 class="mb-4 text-4xl font-bold">FCCY National</h1>
+		<!-- Placeholder until the Home & About tickets: proves Tailwind and Starwind UI work. -->
+		<Button href="#">Starwind button</Button>
 	</body>
 </html>
