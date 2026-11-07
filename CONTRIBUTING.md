@@ -133,7 +133,6 @@ Open the PR with **base: `develop`**. Check the base branch every time, because 
 - [ ] You opened the **preview link** and checked the change in a browser (see below).
 - [ ] The **Commits** tab only lists commits authored by people.
 - [ ] No secrets (API keys, passwords) in the diff. This repo is public.
-- [ ] If the change touches personal data, it follows the privacy rules in the PR template (Philippine Data Privacy Act).
 
 Then click **Squash and merge**. GitHub combines all your commits into one commit on `develop` and deletes the branch. Afterwards:
 
