@@ -16,10 +16,41 @@ flowchart LR
 
 | Tool | Its job |
 |---|---|
-| **Jira** (project `WEB`) | Tracks what to work on. Every branch, commit, and PR names its ticket key. |
+| **Jira** (space `WEB`) | Tracks what to work on. Every branch, commit, and PR names its ticket key, and the board updates itself from GitHub. |
 | **GitHub** | Stores the code, hosts pull requests, and enforces the branch rules. |
 | **GitHub Actions** | Runs CI on every PR: type-check, tests, build. It never deploys. |
 | **Cloudflare Workers Builds** | Builds and deploys the site: previews, staging, and production. |
+
+## Jira tickets
+
+**One ticket = one branch = one pull request.** If a ticket needs more than one PR, split it into smaller tickets.
+
+### How the work is organized
+
+| Jira item | What it is | Example |
+|---|---|---|
+| **Epic** | A milestone or site section. Groups related tickets. | `Home & About`, `Chapters` |
+| **Story** | Something a visitor will see or use | `About page` |
+| **Bug** | Something that's broken | `Map pins hidden on mobile` |
+| **Task** | Docs, tooling, setup, or work outside the code | `Set up Tailwind CSS and Starwind UI` |
+| **Fix version** | The release the ticket ships in | `v1.0.0` |
+
+The full list of pages and the release plan are in [docs/site-plan.md](docs/site-plan.md).
+
+### The board moves itself
+
+The Jira board has four columns. You don't drag tickets between them: the **GitHub for Jira** app and three Jira automation rules move them when something happens in GitHub.
+
+| Column | A ticket moves here when… |
+|---|---|
+| **To Do** | It's created. |
+| **In Progress** | A branch with its key is pushed to GitHub. |
+| **In Review** | A pull request with its key is opened. |
+| **Done** | That pull request is merged. |
+
+This only works if the key (`WEB-22`) is in the branch name and PR title, which the naming rules below already require. Each ticket's **Development** panel in Jira lists its branches, commits, and PRs.
+
+> **Free plan limit:** Jira Free allows a limited number of automation rule runs per month. Each ticket uses about three. Check usage under **Space settings → Automation → Usage** if tickets stop moving.
 
 ## Branches
 
@@ -39,13 +70,13 @@ Branch from `develop` and include the Jira key:
 <type>/WEB-<number>-<short-description>
 ```
 
-| Prefix | Use for | Example |
-|---|---|---|
-| `feature/` | New pages or functionality | `feature/WEB-12-events-page` |
-| `fix/` | Bug fixes going through the normal flow | `fix/WEB-20-broken-date-format` |
-| `docs/` | Documentation only | `docs/WEB-15-contributing-guide` |
-| `chore/` | Tooling, config, dependencies | `chore/WEB-18-update-astro` |
-| `hotfix/` | Urgent production fixes (branch from `main`, see [Hotfixes](#hotfixes)) | `hotfix/WEB-30-signup-crash` |
+| Prefix | Jira type | Use for | Example |
+|---|---|---|---|
+| `feature/` | Story | New pages or functionality | `feature/WEB-12-events-page` |
+| `fix/` | Bug | Bug fixes going through the normal flow | `fix/WEB-20-broken-date-format` |
+| `docs/` | Task | Documentation only | `docs/WEB-15-contributing-guide` |
+| `chore/` | Task | Tooling, config, dependencies | `chore/WEB-18-update-astro` |
+| `hotfix/` | Bug | Urgent production fixes (branch from `main`, see [Hotfixes](#hotfixes)) | `hotfix/WEB-30-signup-crash` |
 
 Copy the key from the Jira ticket itself; don't type it from memory.
 
@@ -102,7 +133,6 @@ Open the PR with **base: `develop`**. Check the base branch every time, because 
 - [ ] You opened the **preview link** and checked the change in a browser (see below).
 - [ ] The **Commits** tab only lists commits authored by people.
 - [ ] No secrets (API keys, passwords) in the diff. This repo is public.
-- [ ] If the change touches personal data, it follows the privacy rules in the PR template (Philippine Data Privacy Act).
 
 Then click **Squash and merge**. GitHub combines all your commits into one commit on `develop` and deletes the branch. Afterwards:
 
@@ -112,7 +142,7 @@ git pull --prune
 git branch -D feature/WEB-12-events-page   # -D because git can't tell a squashed branch was merged
 ```
 
-Within about a minute the staging site updates. Then move the Jira ticket to **Done**.
+Within about a minute the staging site updates, and Jira moves the ticket to **Done** by itself. If it doesn't, see [The board moves itself](#the-board-moves-itself).
 
 ### Using the preview link
 
@@ -127,11 +157,11 @@ A red **Workers Builds** check doesn't block merging. Only CI is required. If it
 
 ## Adding or updating content
 
-> **To be completed in roadmap item 5 (pages).** The events and chapters content collections don't exist yet. When they're built, this section will list the folder for each, an example file, and every required field.
+> **To be completed as each content type is built.** The content collections don't exist yet. When each one is built, this section will list its folder, an example file, and every required field.
 
-What's already decided:
+What's already decided (details in [docs/site-plan.md](docs/site-plan.md#content-types)):
 
-- Events and chapters are **Markdown files** in the repo, one file per event or chapter.
+- Chapters, activities, and officers are **Markdown files** in the repo, one file per item.
 - Content changes follow the same flow as code: branch (`docs/` or `feature/`), PR, check the preview link, squash and merge.
 - A mistake in a content file (a missing date, a typo in a field name) makes **CI fail**, so broken content can't reach the site.
 
