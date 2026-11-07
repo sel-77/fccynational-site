@@ -1,12 +1,25 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
-import { describe, expect, it } from 'vitest';
+import { beforeAll, describe, expect, it } from 'vitest';
 import Index from '../../src/pages/index.astro';
 
 describe('home page', () => {
-	it('renders an h1 heading', async () => {
-		const container = await AstroContainer.create();
-		const html = await container.renderToString(Index);
+	let html: string;
 
-		expect(html).toContain('<h1>');
+	beforeAll(async () => {
+		const container = await AstroContainer.create();
+		html = await container.renderToString(Index);
+	});
+
+	it('renders an h1 heading', () => {
+		// Match <h1> with or without attributes, so adding a class doesn't break the test.
+		expect(html).toMatch(/<h1[\s>]/);
+	});
+
+	it('renders the Starwind button as plain HTML', () => {
+		expect(html).toContain('data-slot="button"');
+	});
+
+	it('ships no client-side JavaScript', () => {
+		expect(html).not.toContain('<script');
 	});
 });

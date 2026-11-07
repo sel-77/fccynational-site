@@ -11,6 +11,7 @@ Don't suggest paid services or paid plans. If a free tier has a catch (limits, p
 ## Stack and why we chose it
 
 - **Astro + TypeScript (strict):** content site; chapters, activities, and officers live as Markdown content collections; fast static pages.
+- **Tailwind CSS v4 + Starwind UI (MIT):** styling and components. Starwind copies component source into `src/components/starwind/` (add more with `npx starwind@latest add <name>`); `npm update` doesn't update them. Theme lives in `src/styles/starwind.css`. Components ship no JS unless interactive. Never use paid Starwind Pro.
 - **Cloudflare Workers with static assets (free plan):** free unlimited static requests; free `.workers.dev` subdomain for now (no custom domain yet).
 - **Cloudflare D1:** stores event sign-ups and contact messages. **Turnstile** blocks spam. We chose this over Supabase because free Supabase projects pause when inactive, which would break the forms between events.
 - **Vitest** for tests, **GitHub Actions** for CI.
