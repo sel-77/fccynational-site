@@ -66,8 +66,10 @@ Design decisions:
 
 Inspired by [LAS Art Foundation](https://www.las-art.foundation): minimal and editorial, letting photos and pubmats carry the color.
 
-- **Colors:** black and white base, with FCCY's logo colors as the only accent
-- **Type:** large headings, generous whitespace. A free font (such as Inter or Geist) self-hosted with Fontsource. The fonts LAS uses (Dinamo) need a paid license, so we don't use them.
+- **Colors:** pure black and white, matching the monochrome FCCY seal. No accent color. Red, green, and amber appear only where they carry meaning, such as form errors.
+- **Type:** large headings, generous whitespace. **Cinzel** for headings, echoing the seal's Roman lettering. It has no lowercase, so it's for headings only. **Inter** for everything else. Both are free (SIL Open Font License) and self-hosted through Astro's Fonts API. The fonts LAS uses (Dinamo) need a paid license, so we don't use them.
+- **Shape:** square corners
+- **Logo:** `src/assets/brand/fccy-logo.png` (320 px, transparent). Fine for the header and favicon; replace with an SVG or larger file before using it big.
 - **Layout:** full-width hero media, content in a 3-column card grid (image, small `category | date` label, title), simple one-row navigation, short footer
 - **Motion:** subtle transitions only
 - **Components:** Tailwind CSS with [Starwind UI](https://starwind.dev), an Astro component library. Components are copied into the repo and ship no JavaScript unless they need interaction. Don't use the paid Starwind Pro.

@@ -11,7 +11,7 @@ Don't suggest paid services or paid plans. If a free tier has a catch (limits, p
 ## Stack and why we chose it
 
 - **Astro + TypeScript (strict):** content site; chapters, activities, and officers live as Markdown content collections; fast static pages.
-- **Tailwind CSS v4 + Starwind UI (MIT):** styling and components. Starwind copies component source into `src/components/starwind/` (add more with `npx starwind@latest add <name>`); `npm update` doesn't update them. Theme lives in `src/styles/starwind.css`. Components ship no JS unless interactive. Never use paid Starwind Pro.
+- **Tailwind CSS v4 + Starwind UI (MIT):** styling and components. Starwind copies component source into `src/components/starwind/` (add more with `npx starwind@latest add <name>`); `npm update` doesn't update them. Theme (black & white, square corners, `font-sans` = Inter, `font-heading` = Cinzel) lives in `src/styles/starwind.css`; fonts are self-hosted via Astro's `fonts` config. Components ship no JS unless interactive. Never use paid Starwind Pro.
 - **Cloudflare Workers with static assets (free plan):** free unlimited static requests; free `.workers.dev` subdomain for now (no custom domain yet).
 - **Cloudflare D1:** stores event sign-ups and contact messages. **Turnstile** blocks spam. We chose this over Supabase because free Supabase projects pause when inactive, which would break the forms between events.
 - **Vitest** for tests, **GitHub Actions** for CI.
@@ -60,7 +60,7 @@ Each open item is a Jira epic. One ticket = one branch = one PR. Mark items done
 - [x] CI checks on PRs (WEB-10): `ci.yml`, PR template, branch rulesets
 - [x] Deploy to Cloudflare (WEB-11): PR preview URLs, staging from `develop`, production from `main`, visible STAGING badge, rollback steps documented in README
 - [x] CONTRIBUTING.md documenting this workflow for future teammates (WEB-12)
-- [ ] Jira–GitHub automation and site plan documented (WEB-22)
+- [x] Jira–GitHub automation and site plan documented (WEB-22)
 
 **v1.0.0: launch**
 
